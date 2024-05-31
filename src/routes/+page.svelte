@@ -3,6 +3,8 @@
 	import TrackList from '$lib/TrackList.svelte';
 	import SongSearch from '$lib/SongSearch.svelte';
 
+	export let data;
+
 	let searchQuery = '';
 	/**
 	 * @type {number | undefined}
@@ -36,17 +38,23 @@
 	};
 </script>
 
-<h1>Spotify x Svelte</h1>
+{#if data?.access_token}
+	<h1>Spotify x Svelte</h1>
 
-<SongSearch {debounce} />
+	<SongSearch {debounce} />
 
-{#if searchQuery}
-	<p>Searching for: <span>{searchQuery}</span></p>
+	{#if searchQuery}
+		<p>Searching for: <span>{searchQuery}</span></p>
+	{:else}
+		<p>Here are your top tracks</p>
+	{/if}
+
+	<TrackList {topTracks} />
 {:else}
-	<p>Here are your top tracks</p>
+	<div class="loginContainer">
+		<button> Login To Spotify </button>
+	</div>
 {/if}
-
-<TrackList {topTracks} />
 
 <style>
 	* {
