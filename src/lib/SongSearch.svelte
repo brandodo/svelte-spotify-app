@@ -1,8 +1,18 @@
 <script>
+	import { enhance } from '$app/forms';
+
 	export let debounce;
 </script>
 
-<input type="search" on:input={debounce} placeholder="Enter a song / artist name..." />
+<form on:submit|preventDefault method="POST" action="?/search" use:enhance>
+	<input
+		type="search"
+		name="search"
+		on:input={debounce}
+		placeholder="Enter a song / artist name..."
+	/>
+	<button>Search</button>
+</form>
 
 <style>
 	input {
