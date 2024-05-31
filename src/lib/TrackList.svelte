@@ -10,14 +10,14 @@
 	<div class="tracks">
 		{#if resolved_tracks?.top_tracks?.length > 0}
 			{#each resolved_tracks?.top_tracks as track}
-				<div class="track">
+				<a href={`/analyze/${track?.id}`} class="track">
 					<div>
 						<h3>{track?.name}</h3>
 						<p>{track?.artists?.[0]?.name}</p>
 					</div>
 
 					<img class="albumArt" src={track?.album?.images?.[0]?.url} alt="track album cover art" />
-				</div>
+				</a>
 			{/each}
 		{/if}
 	</div>
@@ -37,10 +37,11 @@
 		border-radius: 10px;
 		padding: 0 15px;
 		width: 350px;
+		text-decoration: none;
 	}
 
 	.albumArt {
-        border-radius: 10px;
+		border-radius: 10px;
 		width: 100%;
 	}
 
